@@ -1,0 +1,22 @@
+{
+  "ukjent": {
+    "label": "Ukjent / manuell",
+    "defaults": {}
+  },
+  "elvia": {
+    "label": "Elvia (eksempel)",
+    "defaults": {
+      "opt_nett_energiledd_dag_ore_kwh": 12.5,
+      "opt_nett_energiledd_natt_ore_kwh": 8.5,
+      "opt_nett_fastledd_kr_mnd": 199
+    }
+  },
+  "tensio": {
+    "label": "Tensio (eksempel)",
+    "defaults": {
+      "opt_nett_energiledd_dag_ore_kwh": 11.0,
+      "opt_nett_energiledd_natt_ore_kwh": 11.0,
+      "opt_nett_fastledd_kr_mnd": 149
+    }
+  }
+}

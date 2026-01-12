@@ -1,0 +1,30 @@
+{
+  "title": "Electricity price total (Norway)",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up",
+        "description": "Pick a spot price sensor and defaults.",
+        "data": {
+          "name": "Name",
+          "spot_entity": "Spot price sensor (NOK/kWh)",
+          "price_area": "Price area",
+          "dso": "Grid company (DSO)",
+          "contract": "Contract type"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "opt_price_area": "Price area",
+          "opt_dso": "Grid company (DSO)",
+          "opt_contract": "Contract type"
+        }
+      }
+    }
+  }
+}

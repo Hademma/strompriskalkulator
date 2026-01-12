@@ -1,0 +1,30 @@
+{
+  "title": "Strømpris total (Norge)",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Oppsett",
+        "description": "Velg spotpris-sensor og standardvalg.",
+        "data": {
+          "name": "Navn",
+          "spot_entity": "Spotpris-sensor (NOK/kWh)",
+          "price_area": "Prisområde",
+          "dso": "Nettselskap",
+          "contract": "Avtaletype"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Innstillinger",
+        "data": {
+          "opt_price_area": "Prisområde",
+          "opt_dso": "Nettselskap",
+          "opt_contract": "Avtaletype"
+        }
+      }
+    }
+  }
+}
