@@ -23,7 +23,7 @@ OPT_ENOVA_ORE = "opt_enova_ore_kwh"
 OPT_MVA_PROSENT = "opt_mva_prosent"
 
 PRICE_AREAS = ["NO1", "NO2", "NO3", "NO4", "NO5"]
-CONTRACTS = ["spot_plus_paaslag", "fastpris", "variabel"]
+CONTRACTS = ["Spot_plus_paaslag", "Norgespris", "Fastpris", "Variabel"]
 
 DEFAULTS = {
     OPT_PRICE_AREA: "NO1",
