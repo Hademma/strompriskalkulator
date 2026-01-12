@@ -2,10 +2,10 @@
   "domain": "strompris_total",
   "name": "Strømpris Total (Norge)",
   "version": "0.1.0",
-  "documentation": "https://github.com/yourname/strompris_total",
-  "issue_tracker": "https://github.com/yourname/strompris_total/issues",
+  "documentation": "https://github.com/hademma/strompris_total",
+  "issue_tracker": "https://github.com/hademma/strompris_total/issues",
   "dependencies": [],
-  "codeowners": [],
+  "codeowners": [hademma],
   "requirements": [],
   "config_flow": true,
   "iot_class": "calculated"
