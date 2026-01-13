@@ -43,6 +43,7 @@ class StromprisTotalConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 CONF_PRICE_AREA: user_input[CONF_PRICE_AREA],
                 CONF_DSO: user_input[CONF_DSO],
                 CONF_CONTRACT: user_input[CONF_CONTRACT],
+                CONF_POWER_ENTITY: user_input[CONF_POWER_ENTITY],
             }
 
             # Seed options with defaults + DSO defaults + chosen values
@@ -66,6 +67,7 @@ class StromprisTotalConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             vol.Required(CONF_PRICE_AREA, default=DEFAULTS[OPT_PRICE_AREA]): vol.In(PRICE_AREAS),
             vol.Required(CONF_DSO, default=DEFAULTS[OPT_DSO]): vol.In([k for k, _ in _dso_options()]),
             vol.Required(CONF_CONTRACT, default=DEFAULTS[OPT_CONTRACT]): vol.In(CONTRACTS),
+            vol.Required(CONF_POWER_ENTITY): selector.EntitySelector(selector.EntitySelectorConfig(domain="sensor")),
         })
         return self.async_show_form(step_id="user", data_schema=schema)
 
