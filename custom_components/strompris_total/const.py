@@ -5,6 +5,8 @@ CONF_SPOT_ENTITY = "spot_entity"
 CONF_PRICE_AREA = "price_area"
 CONF_DSO = "dso"
 CONF_CONTRACT = "contract"
+CONF_POWER_ENTITY = "power_entity"
+
 
 # Options keys (stored in config_entry.options)
 OPT_PRICE_AREA = "opt_price_area"
