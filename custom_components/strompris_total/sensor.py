@@ -144,53 +144,53 @@ class StromprisTotalSensor(StromprisBaseEntity, SensorEntity):
         return is_weekday and (6 <= now.hour < 22)
 
     @property
-def native_value(self) -> float | str | None:
-    key = self.entity_description.key
-    opts = dict(DEFAULTS)
-    opts.update(self.entry.options)
+    def native_value(self) -> float | str | None:
+        key = self.entity_description.key
+        opts = dict(DEFAULTS)
+        opts.update(self.entry.options)
 
-    # Kapasitetslogikk (snitt av topp3 døgnmaks)
-    avg_kw = float(self.capacity.top3_avg_kw())
-    tier_label, cap_price_kr_mnd, next_upper_kw = self._capacity_tier(avg_kw, opts)
-    margin_kw = max(0.0, next_upper_kw - avg_kw)
+        # Kapasitetslogikk (snitt av topp3 døgnmaks)
+        avg_kw = float(self.capacity.top3_avg_kw())
+        tier_label, cap_price_kr_mnd, next_upper_kw = self._capacity_tier(avg_kw, opts)
+        margin_kw = max(0.0, next_upper_kw - avg_kw)
 
-    if key == "kapasitet_top3_snitt_kw":
-        return round(avg_kw, 3)
+        if key == "kapasitet_top3_snitt_kw":
+            return round(avg_kw, 3)
 
-    if key == "kapasitet_trinn":
-        return tier_label
+        if key == "kapasitet_trinn":
+            return tier_label
 
-    if key == "kapasitet_margin_kw":
-        return round(margin_kw, 3)
+        if key == "kapasitet_margin_kw":
+            return round(margin_kw, 3)
 
-    if key == "kapasitet_fastledd_kr_mnd":
-        return round(cap_price_kr_mnd, 2)
+        if key == "kapasitet_fastledd_kr_mnd":
+            return round(cap_price_kr_mnd, 2)
 
-    if key == "fast_kost_kr_mnd":
-        # HER inkluderer vi kapasitetsledd i fast kostnad
-        return round(
-            float(opts[OPT_STROM_FAST_KR]) + float(opts[OPT_NETT_FAST_KR]) + cap_price_kr_mnd,
-            2,
-        )
+        if key == "fast_kost_kr_mnd":
+            # HER inkluderer vi kapasitetsledd i fast kostnad
+            return round(
+                float(opts[OPT_STROM_FAST_KR]) + float(opts[OPT_NETT_FAST_KR]) + cap_price_kr_mnd,
+                2,
+            )
 
-    # total variabel (kr/kWh) – samme som før
-    spot_state = self.hass.states.get(self.spot_entity)
-    try:
-        spot = float(spot_state.state) if spot_state else 0.0
-    except (TypeError, ValueError):
-        spot = 0.0
+        # total variabel (kr/kWh) – samme som før
+        spot_state = self.hass.states.get(self.spot_entity)
+        try:
+            spot = float(spot_state.state) if spot_state else 0.0
+        except (TypeError, ValueError):
+            spot = 0.0
 
-    now = dt_util.now()
-    nett_energiledd_ore = float(opts[OPT_NETT_DAG_ORE]) if self._is_day_rate(now) else float(opts[OPT_NETT_NATT_ORE])
+        now = dt_util.now()
+        nett_energiledd_ore = float(opts[OPT_NETT_DAG_ORE]) if self._is_day_rate(now) else float(opts[OPT_NETT_NATT_ORE])
 
-    paaslag_kr = float(opts[OPT_PAASLAG_ORE]) / 100.0
-    nett_kr = float(nett_energiledd_ore) / 100.0
-    elavgift_kr = float(opts[OPT_ELAVGIFT_ORE]) / 100.0
-    enova_kr = float(opts[OPT_ENOVA_ORE]) / 100.0
-    mva = float(opts[OPT_MVA_PROSENT]) / 100.0
+        paaslag_kr = float(opts[OPT_PAASLAG_ORE]) / 100.0
+        nett_kr = float(nett_energiledd_ore) / 100.0
+        elavgift_kr = float(opts[OPT_ELAVGIFT_ORE]) / 100.0
+        enova_kr = float(opts[OPT_ENOVA_ORE]) / 100.0
+        mva = float(opts[OPT_MVA_PROSENT]) / 100.0
 
-    eks_mva = spot + paaslag_kr + nett_kr + elavgift_kr + enova_kr
-    return round(eks_mva * (1.0 + mva), 4)
+        eks_mva = spot + paaslag_kr + nett_kr + elavgift_kr + enova_kr
+        return round(eks_mva * (1.0 + mva), 4)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any]:
